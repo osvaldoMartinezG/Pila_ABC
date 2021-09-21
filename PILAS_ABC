@@ -1,0 +1,89 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pilaabcd;
+
+import java.util.Scanner;
+
+
+/**
+ *
+ * @author Pug
+ */
+public class PilaABCD {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        //se llama al escaner para comenzar la variables
+        Scanner readteclado = new Scanner(System.in);
+        //usamos arreglos unidemensionales de tipo char para mostrar la lista
+          char[] pile = new char['A'];
+        char[] ABC = new char['A'];
+      ABC[27] = 0;
+      //declaramos la variable para usar el swicth y otra char iniciado en 0
+     
+        int opcion;
+        char top = 0;
+      //el ciclo do es para poder  usar el swicth con un menu de salida
+        do {
+           //menu principal de acciones
+            System.out.println("1 Llenar");
+            System.out.println("2 Mostrar");
+            System.out.println("3 Eliminar ");
+            System.out.println("7 salir");
+            opcion = readteclado.nextInt();
+            
+            switch (opcion) {
+//Caso uno donde se puede agregar el abecedario sin necesidad de insertar uno por uno
+                case 1:
+                    if ( top>= 26) {
+                        System.out.println("sin lugares libres");
+                    } 
+                    else {
+                        //ciclo for para poder llenar los espacios con la letras del abecedario
+                        //teniendo en cuenta que solo hay letras  y contando el 0 como posicion
+                        for (int i = 0; i <= 25;++i) {
+                            ABC[i] = (char) ('A'+i) ;
+                            pile[top] =  (ABC[i]);
+                            top++;
+                            
+                        } 
+                        //en caso de estar lleno los datos
+                        System.out.print("Valores agregado\n");
+                    }
+                    break;
+//seccion del case 2 que se encarga de de mostrar los datos aunque se hayan eliminados unos o los valores completos 
+                case 2:
+                     if (top > 0) {
+                         for (int i = top - 1; i >= 0; i--) {
+                             System.out.println(" " + pile[i]);
+                         }
+                     }
+                     else {
+                         // en caso de no haber ningun valor se mostrara esta advertencia
+                         System.out.println("pila vacia");
+                     }
+                    break;
+
+//se encarga de eliminar el ultimo valor para poder ingresar nuevo en el case 1
+                case 3:
+                    if (top > 0) {
+                        
+                        System.out.println("dato eliminado");
+                        top--;
+                    } 
+                    else {
+                        //mensaje en caso de no haber ningun valor
+                        System.out.println("pila vacia");
+                    }
+                    break;
+            }
+//es la opcion 7, mientras esta no este puesta, el juego se reiniciara
+        } while (opcion != 7);
+    }
+    
+}
